@@ -1,58 +1,41 @@
-class Vehicle {
-    String brand;
-    String model;
+import java.util.ArrayList;
 
-    Vehicle(String brand, String model) {
-        this.brand = brand;
-        this.model = model;
+class Box<T> {
+    private ArrayList<T> items = new ArrayList<>();
+
+    public void addItem(T item) {
+        items.add(item);
     }
 
-    void displayInfo() {
-        System.out.println("Vehicle: " + brand + " " + model);
-    }
-}
-
-class Car extends Vehicle {
-    int doors;
-
-    Car(String brand, String model, int doors) {
-        super(brand, model); // Call Vehicle constructor
-        this.doors = doors;
-    }
-
-    @Override
-    void displayInfo() {
-        super.displayInfo(); // Call Vehicle's displayInfo
-        System.out.println("Type: Car, Doors: " + doors);
-    }
-}
-
-class ElectricCar extends Car {
-    int batteryCapacity;
-
-    ElectricCar(String brand, String model, int doors, int batteryCapacity) {
-        super(brand, model, doors); // Call Car constructor
-        this.batteryCapacity = batteryCapacity;
-    }
-
-    @Override
-    void displayInfo() {
-        super.displayInfo(); // Call Car's displayInfo
-        System.out.println("Electric Car, Battery Capacity: " + batteryCapacity + " kWh");
+    public void displayItems() {
+        System.out.println("Box contains:");
+        for (T item : items) {
+            System.out.println("- " + item);
+        }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Vehicle v = new Vehicle("GenericBrand", "ModelX");
-        v.displayInfo();
-        System.out.println();
 
-        Car c = new Car("Toyota", "Corolla", 4);
-        c.displayInfo();
-        System.out.println();
+        Box<Integer> intBox = new Box<>();
+        intBox.addItem(10);
+        intBox.addItem(25);
+        intBox.addItem(50);
+        System.out.println(" Integer Box:");
+        intBox.displayItems();
 
-        ElectricCar e = new ElectricCar("Tesla", "Model S", 4, 100);
-        e.displayInfo();
+        Box<Double> doubleBox = new Box<>();
+        doubleBox.addItem(15.5);
+        doubleBox.addItem(42.9);
+        System.out.println("\n Double Box:");
+        doubleBox.displayItems();
+
+        Box<String> stringBox = new Box<>();
+        stringBox.addItem("Apples");
+        stringBox.addItem("Bananas");
+        stringBox.addItem("Oranges");
+        System.out.println("\n String Box:");
+        stringBox.displayItems();
     }
 }
